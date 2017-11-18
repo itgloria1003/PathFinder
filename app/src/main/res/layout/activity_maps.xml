@@ -16,11 +16,11 @@
             android:layout_weight="4" />
 
         <Button
-            android:id="@+id/btSearch"
+            android:id="@+id/btnPlan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Go" />
+            android:text="Plan" />
 
 
     </LinearLayout>
@@ -39,19 +39,11 @@
 
 
     <Button
-        android:id="@+id/btMark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="Mark" />
-
-    <Button
         android:id="@+id/btSatellite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btMark"
         android:text="Sat" />
 
     <Button
@@ -63,11 +55,11 @@
         android:text="Clear" />
 
     <ZoomControls
-        android:id="@+id/zcZoom"
+        android:id="@+id/zoomButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btMark"
+        android:layout_above="@+id/btSatellite"
         android:layout_alignParentRight="true" />
-
+    
 </RelativeLayout>
 
