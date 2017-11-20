@@ -49,6 +49,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MultivaluedMap;
 
 import hk.cuhk.gloriatse.pathfinder.model.DirectionResponse;
+import hk.cuhk.gloriatse.pathfinder.model.EndLocation;
 import hk.cuhk.gloriatse.pathfinder.model.OverviewPolyline;
 import hk.cuhk.gloriatse.pathfinder.model.PathFinderRequest;
 import hk.cuhk.gloriatse.pathfinder.model.Route;
@@ -73,6 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationClient;
 
     private Polyline routeDrawn;
+    private Marker destinationMarker;
 
     // A default location (Sydney, Australia) and default zoom to use when location permission is
     // not granted.
@@ -168,6 +170,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         if (routeDrawn!=null){
                             routeDrawn.remove();
                         }
+                        if (destinationMarker!=null){
+                            destinationMarker.remove();
+                        }
 
                         lineOptions = new PolylineOptions();
 
@@ -184,6 +189,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                         lineOptions.color(Color.RED);
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        EndLocation endLocation = route.getLegs().get(0).getEndLocation();
+                        String endAddress = route.getLegs().get(0).getEndAddress();
+                        markerOptions.position(new LatLng(endLocation.getLat(),endLocation.getLng()));
+                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                        markerOptions.title("Go to " + endAddress);
+                        markerOptions.snippet(route.getSummary());
+                        destinationMarker = mMap.addMarker(markerOptions);
                         routeDrawn = mMap.addPolyline(lineOptions);
 
 
@@ -217,6 +230,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+            @Override
+            // Return null here, so that getInfoContents() is called next.
+            public View getInfoWindow(Marker arg0) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                // Inflate the layouts for the info window, title and snippet.
+                View infoWindow = getLayoutInflater().inflate(R.layout.instruction_details, null);
+
+                TextView title = ((TextView) infoWindow.findViewById(R.id.title));
+                title.setText(marker.getTitle());
+
+                TextView snippet = ((TextView) infoWindow.findViewById(R.id.snippet));
+                snippet.setText(marker.getSnippet());
+
+                return infoWindow;
+            }
+        });
 
 
         // init the control of the buttons
