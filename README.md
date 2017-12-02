@@ -1,4 +1,8 @@
 # PathFinder
+Launch Options:
+Launch: Specified Activity
+Activity: hk.cuhk.gloriatse.pathfinder.MapsActivity
+
 Test on: 
 Genymotion - Virtual Devices (Google Nexus 6 - 7.0.0 - API24 1440X2560) 
 
