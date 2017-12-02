@@ -212,7 +212,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         toggleRefresh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    // The toggle is enabled
+                    // The toggle is enabled, disable other buttons
+                    btnPlan.setEnabled(false);
+                    radioButtonCurrentMode.setEnabled(false);
+
+
                     showToast("Start updating the path at interval of 10 seconds...");
                     LocationRequest r=  new LocationRequest();
                     int interval10S = 10000;
@@ -229,6 +233,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 } else {
                     // The toggle is disabled
                     showToast("Stop updating the path...");
+                    // The toggle is disabled , enable other buttons
+                    btnPlan.setEnabled(true);
+                    radioButtonCurrentMode.setEnabled(true);
+
                     if (mLocationCallback!=null){
                         mFusedLocationClient.removeLocationUpdates(mLocationCallback);
                     }
@@ -323,9 +331,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 if (toggleRefresh.isChecked() ){
                     if (leg.getSteps().size()>0) {
-
-                        // just show the first marker
+                        // just show the first few  markers
                         Step s = leg.getSteps().get(0);
+                        Marker marker = addStepMakerOnMap(s);
+                        stepMarkers.add(marker);
+                    }
+                    if (leg.getSteps().size()>1) {
+                        Step s = leg.getSteps().get(1);
                         Marker marker = addStepMakerOnMap(s);
                         stepMarkers.add(marker);
                     }
