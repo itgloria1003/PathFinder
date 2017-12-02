@@ -305,6 +305,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         int padding = 50;
                         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), padding));
                     }
+                } else {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                            new LatLng(mLastKnownLocation.getLatitude(),
+                                    mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                 }
 
                 lineOptions.color(Color.RED);
