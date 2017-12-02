@@ -17,6 +17,21 @@ public class PathFinderRequest {
 
     private LatLng orig;
     private String origLocation;
+    public static final String MODE_DRIVING  = "driving";
+    public static final String MODE_WALKING = "walking" ;
+
+    private String mode;
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+
+
 
     public String getOrigLocation() {
         return origLocation;

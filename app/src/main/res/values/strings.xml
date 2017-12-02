@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">PathFinder</string>
     <string name="title_activity_maps">Map</string>
+    <string name="mode_walking">Walking</string>
+    <string name="mode_driving">Driving</string>
 </resources>

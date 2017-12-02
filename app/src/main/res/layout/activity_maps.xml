@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -6,21 +7,78 @@
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="5">
 
-        <EditText
-            android:id="@+id/textLocation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4" />
+        <LinearLayout
 
-        <Button
-            android:id="@+id/btnPlan"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Plan" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/textLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnPlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Plan" />
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <ToggleButton
+                android:id="@+id/toggleUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:checked="false"
+                android:textOff="Refresh Path (10s)"
+                android:textOn="Stop path update" />
+
+            <RadioGroup
+                android:id="@+id/radioMode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+
+                >
+
+                <RadioButton
+
+                    android:id="@+id/mode_walk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+
+                    android:duplicateParentState="true"
+                    android:text="@string/mode_walking" />
+
+                <RadioButton
+
+                    android:id="@+id/mode_drive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:duplicateParentState="true"
+                    android:text="@string/mode_driving" />
+            </RadioGroup>
+
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -35,30 +93,19 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/ll1"
+
         tools:context="hk.cuhk.gloriatse.pathfinder.MapsActivity" />
 
 
-    <Button
-        android:id="@+id/btSatellite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:text="Sat" />
 
-    <Button
-        android:id="@+id/btClear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btSatellite"
-        android:text="Clear" />
+
 
     <ZoomControls
         android:id="@+id/zoomButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btSatellite"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
 
 </RelativeLayout>
